@@ -1,0 +1,329 @@
+
+<!-- saved from url=(0041)https://yaden2018.github.io/multispeaker/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>TTSSpeechBERT
+</title>
+    <link rel="shortcut icon" href="https://vancycici.github.io/fbdecode/img/ms.jpg">
+    <link rel="icon" href="https://vancycici.github.io/fbdecode/img/ms.jpg">
+    <link rel="apple-touch-icon" href="https://vancycici.github.io/fbdecode/img/ms.jpg">
+</head>
+<body>
+<script type="text/javascript" async="" src="./PROSODY PRE-TRAINING FOR IMPROVING EXPRESSIVENESS IN NEURAL TTS/analytics.js.download"></script><script async="" src="./PROSODY PRE-TRAINING FOR IMPROVING EXPRESSIVENESS IN NEURAL TTS/js"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'UA-125850295-1');
+</script>
+
+<article>
+    <header>
+        <h1>PROSODY PRE-TRAINING FOR IMPROVING EXPRESSIVENESS IN NEURAL TTS</h1>
+    </header>
+</article> 
+<div><b>Authors:</b> Liping Chen, Yan Deng, Shifeng Pan, Xi Wang, Frank K. Soong, Lei He</a> (Submitted to ICASSP 2020</a>)</div>
+ 
+<div><b>Abstract:</b> This paper presents a speech BERT model designed for neural text-to-speech (TTS), to extract the embedding that represents latent prosody attributes in speech segments, where BERT stands for Bidirectional Encoder Representations from Transformers. As a pre-training model, it can learn the prosody attributes from a large scale of data, which is not confined by the training data of TTS model. In our proposed method, the embedding is extracted from the previous segment of a fixed length, and applied in combination with mel-spectrogram to the decoder of neural TTS to predict the frames in the following segment. Experimental results on Transformer TTS show that the proposed method can be used to extract fine-grained segment-level prosody information, which is complementary to current utterance-level prosody modeling in neural TTS. The objective results on our internal single speaker TTS corpus demonstrate its effectiveness at closing the gap between generated speech and recordings in terms of prosody. Furthermore, the subjective results show that our proposed method are more preferred in both in-domain and out-of-domain texts, on our internal professional single speaker, multiple speakers and the public LJ Speaker.
+</div> 
+
+<br/>
+<br/>
+<br/>
+
+
+Firstly, we will present the reconstructed speech using the BERT model with prosody pre-training (audio unseen in the speech BERT model training).
+
+<div>
+    <h3>Masked segment reconstructed by speech BERT with Griffin-Lim vocoder</h3>
+    
+    <i>There was not a worse vagabond in Shrewsbury than old Barney the piper.</i>
+        <table><tbody><tr>
+            <td>Recording:</td>
+            <td>
+                <audio controls="">
+                    <source src="wav/100_121669_000004_000000.ori-gl.wav">
+                </audio>
+            </td>
+            <td></td>
+            <td>Padded input:</td>
+            <td>
+                <audio controls="">
+                    <source src="wav/100_121669_000004_000000.padded-gl.wav">
+                </audio>
+            </td>
+            <td></td>
+            <td>Reconstructed output:</td>
+            <td>
+                <audio controls="">
+                    <source src="wav/100_121669_000004_000000-gl.wav">
+                </audio>
+            </td>
+        </tr>
+    </tbody></table>
+    <i>His name was John Palmer.</i>
+    <table><tbody><tr>
+        <td>Recording:</td>
+        <td>
+            <audio controls="">
+                <source src="wav/1006_135212_000002_000004.ori-gl.wav">
+            </audio>
+        </td>
+        <td></td>
+        <td>Padded input:</td>
+        <td>
+            <audio controls="">
+                <source src="wav/1006_135212_000002_000004.padded-gl.wav">
+            </audio>
+        </td>
+        <td></td>
+        <td>Reconstructed output:</td>
+        <td>
+            <audio controls="">
+                <source src="wav/1006_135212_000002_000004-gl.wav">
+            </audio>
+        </td>
+    </tr>
+</tbody></table>
+
+<br/>
+<br/>
+<br/>
+
+<h3>LJSpeech</h3>
+<table><tbody><tr>
+    <td>Recording sample:</td>
+    <td>
+        <audio controls="">
+            <source src="wav/LJ/0000000000.wav">
+        </audio>
+    </td>
+    <td></td>
+</tbody></table>
+
+<br/>
+<br/>
+<b>The synthesized speech on LJSpeech for subjective evaluation:</b>
+
+<table style="margin-left:auto;margin-right:auto;"><tbody><tr>
+    <td colspan="3"><b><i>In-domain synthesized speech synthesis with WaveNet vocoder<i></i></b></td>
+</tr>
+<tr><td></td>
+<td style="text-align:center">Transformer TTS</td>
+<td style="text-align:center">Transformer TTS with acoustic embedding</td>
+<td style="text-align:center">Transformer TTS with prosody embedding</td>
+    </tr>
+<tr>
+<td><i>Ten days were consumed in these negotiations; but the spirit of vengeance refused to yield.</i></td>
+<td>
+    <audio controls="">
+        <source src="wav/LJ/001_transformerTTS.wav">
+    </audio>
+</td>
+<td>
+    <audio controls="">
+        <source src="wav/LJ/001_speechBERT.wav">
+    </audio>
+</td>
+<td>
+    <audio controls="">
+        <source src="wav/LJ/001_prosodyBERT.wav">
+    </audio>
+</td>
+</tr>
+<tr>
+<td><i>The thrall's eyes flashed.</i></td>
+<td>
+    <audio controls="">
+        <source src="wav/LJ/002_transformerTTS.wav">
+    </audio>
+</td>
+<td>
+    <audio controls="">
+        <source src="wav/LJ/002_speechBERT.wav">
+    </audio>
+</td>
+<td>
+    <audio controls="">
+        <source src="wav/LJ/002_prosodyBERT.wav">
+    </audio>
+</td>
+</tr>
+<tr>
+<td><i>However loudly outward circumstances might oppose this, he now felt, with a certainty which surprised him, that this work was not his own.</i></td>
+<td>
+    <audio controls="">
+        <source src="wav/LJ/003_transformerTTS.wav">
+    </audio>
+</td>
+<td>
+    <audio controls="">
+        <source src="wav/LJ/003_speechBERT.wav">
+    </audio>
+</td>
+<td>
+    <audio controls="">
+        <source src="wav/LJ/003_prosodyBERT.wav">
+    </audio>
+</td>
+</tr>
+</tbody></table>
+
+<br/>
+<br/>
+
+<table style="margin-left:auto;margin-right:auto;"><tbody><tr>
+    <td colspan="3"><b><i>Out-of-domain synthesized speech synthesis with WaveNet vocoder<i></i></b></td>
+</tr>
+<tr><td></td>
+<td style="text-align:center">Transformer TTS</td>
+<td style="text-align:center">Transformer TTS with acoustic embedding</td>
+<td style="text-align:center">Transformer TTS with prosody embedding</td>
+    </tr>
+<tr>
+<td><i>There is no flooding so far in the downtown area, Hoefer added.</i></td>
+<td>
+    <audio controls="">
+        <source src="wav/LJ/001_transformerTTS_news.wav">
+    </audio>
+</td>
+<td>
+    <audio controls="">
+        <source src="wav/LJ/001_speechBERT_news.wav">
+    </audio>
+</td>
+<td>
+    <audio controls="">
+        <source src="wav/LJ/001_prosodyBERT_news.wav">
+    </audio>
+</td>
+</tr>
+<tr>
+<td><i>His statement reiterated his heartfelt apology to the Irish people.</i></td>
+<td>
+    <audio controls="">
+        <source src="wav/LJ/002_transformerTTS_news.wav">
+    </audio>
+</td>
+<td>
+    <audio controls="">
+        <source src="wav/LJ/002_speechBERT_news.wav">
+    </audio>
+</td>
+<td>
+    <audio controls="">
+        <source src="wav/LJ/002_prosodyBERT_news.wav">
+    </audio>
+</td>
+</tr>
+<tr>
+<td><i>As it turned out, my quarantine home would be the InterContinental Hotel in Sydney's CBD Central Business District.</i></td>
+<td>
+    <audio controls="">
+        <source src="wav/LJ/003_transformerTTS_news.wav">
+    </audio>
+</td>
+<td>
+    <audio controls="">
+        <source src="wav/LJ/003_speechBERT_news.wav">
+    </audio>
+</td>
+<td>
+    <audio controls="">
+        <source src="wav/LJ/003_prosodyBERT_news.wav">
+    </audio>
+</td>
+</tr>
+</tbody></table>
+
+<br/>
+<br/>
+
+
+<h3>Internal single speaker</h3>
+<table><tbody><tr>
+    <td>Recording sample:</td>
+    <td>
+        <audio controls="">
+            <source src="wav/single_spkr/0000000336.wav">
+        </audio>
+    </td>
+    <td></td>
+</tbody></table>
+
+<br/>
+
+<b>The synthesized speech on our internal speaker for subjective evaluation:</b>
+
+
+<table style="margin-left:auto;margin-right:auto;"><tbody><tr>
+    <td colspan="3"><b><i>In-domain synthesized speech synthesis with WaveNet vocoder<i></i></b></td>
+</tr>
+<tr><td></td>
+<td style="text-align:center">Transformer TTS</td>
+<td style="text-align:center">Transformer TTS with acoustic embedding</td>
+<td style="text-align:center">Transformer TTS with prosody embedding</td>
+    </tr>
+<tr>
+<td><i>They're highly vivid or rich.</i></td>
+<td>
+    <audio controls="">
+        <source src="wav/single_spkr/TTS-Wave.w_o-GeneralSentence-0000000054.wav">
+    </audio>
+</td>
+<td>
+    <audio controls="">
+        <source src="wav/single_spkr/TTS-Wave.speechBERT-GeneralSentence-0000000054.wav">
+    </audio>
+</td>
+<td>
+    <audio controls="">
+        <source src="wav/single_spkr/TTS-Wave.prosodyBERT-GeneralSentence-0000000054.wav">
+    </audio>
+</td>
+</tr>
+<tr>
+<td><i>This raises a huge challenge for developing effective treatments.</i></td>
+<td>
+    <audio controls="">
+        <source src="wav/single_spkr/TTS-Wave.w_o-GeneralSentence-0000000053.wav">
+    </audio>
+</td>
+<td>
+    <audio controls="">
+        <source src="wav/single_spkr/TTS-Wave.speechBERT-GeneralSentence-0000000053.wav">
+    </audio>
+</td>
+<td>
+    <audio controls="">
+        <source src="wav/single_spkr/TTS-Wave.prosodyBERT-GeneralSentence-0000000053.wav">
+    </audio>
+</td>
+</tr>
+<tr>
+<td><i>One of his favorite videos features ballerinas wearing LED lights.</i></td>
+<td>
+    <audio controls="">
+        <source src="wav/single_spkr/TTS-Wave.w_o-GeneralSentence-0000000056.wav">
+    </audio>
+</td>
+<td>
+    <audio controls="">
+        <source src="wav/single_spkr/TTS-Wave.speechBERT-GeneralSentence-0000000056.wav">
+    </audio>
+</td>
+<td>
+    <audio controls="">
+        <source src="wav/single_spkr/TTS-Wave.prosodyBERT-GeneralSentence-0000000056.wav">
+    </audio>
+</td>
+</tr>
+</tbody></table>
+
+</div>
+
+</body></html>
