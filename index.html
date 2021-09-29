@@ -2,7 +2,7 @@
 <!-- saved from url=(0041)https://yaden2018.github.io/multispeaker/ -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
-    <title>TTSSpeechBERT
+    <title>TTSProsodyEmbedding
 </title>
     <link rel="shortcut icon" href="https://vancycici.github.io/fbdecode/img/ms.jpg">
     <link rel="icon" href="https://vancycici.github.io/fbdecode/img/ms.jpg">
@@ -26,7 +26,7 @@
         <h1>PROSODY PRE-TRAINING FOR IMPROVING EXPRESSIVENESS IN NEURAL TTS</h1>
     </header>
 </article> 
-<div><b>Authors:</b> Liping Chen, Yan Deng, Shifeng Pan, Xi Wang, Frank K. Soong, Lei He</a> (Submitted to ICASSP 2020</a>)</div>
+<div><b>Authors:</b> Liping Chen, Yan Deng, Shifeng Pan, Xi Wang, Frank K. Soong, Lei He</a> (Submitted to ICASSP 2022</a>)</div>
  
 <div><b>Abstract:</b> This paper presents a speech BERT model designed for neural text-to-speech (TTS), to extract the embedding that represents latent prosody attributes in speech segments, where BERT stands for Bidirectional Encoder Representations from Transformers. As a pre-training model, it can learn the prosody attributes from a large scale of data, which is not confined by the training data of TTS model. In our proposed method, the embedding is extracted from the previous segment of a fixed length, and applied in combination with mel-spectrogram to the decoder of neural TTS to predict the frames in the following segment. Experimental results on Transformer TTS show that the proposed method can be used to extract fine-grained segment-level prosody information, which is complementary to current utterance-level prosody modeling in neural TTS. The objective results on our internal single speaker TTS corpus demonstrate its effectiveness at closing the gap between generated speech and recordings in terms of prosody. Furthermore, the subjective results show that our proposed method are more preferred in both in-domain and out-of-domain texts, on our internal professional single speaker, multiple speakers and the public LJ Speaker.
 </div> 
@@ -41,50 +41,62 @@ Firstly, we will present the reconstructed speech using the BERT model with pros
 <div>
     <h3>Masked segment reconstructed by speech BERT with Griffin-Lim vocoder</h3>
     
-    <i>There was not a worse vagabond in Shrewsbury than old Barney the piper.</i>
+    <i>Sample 1</i>
         <table><tbody><tr>
             <td>Recording:</td>
             <td>
                 <audio controls="">
-                    <source src="wav/100_121669_000004_000000.ori-gl.wav">
+                    <source src="wav/1006_135212_000003_000002.ori-gl.wav">
                 </audio>
             </td>
             <td></td>
             <td>Padded input:</td>
             <td>
                 <audio controls="">
-                    <source src="wav/100_121669_000004_000000.padded-gl.wav">
+                    <source src="wav/1006_135212_000003_000002.padded-gl.wav">
                 </audio>
             </td>
             <td></td>
-            <td>Reconstructed output:</td>
+            <td>Reconstructed output without prosody pre-training:</td>
             <td>
                 <audio controls="">
-                    <source src="wav/100_121669_000004_000000-gl.wav">
+                    <source src="wav/1006_135212_000003_000002-speechBERT.wav">
+                </audio>
+            </td>
+            <td>Reconstructed output with prosody pre-training:</td>
+            <td>
+                <audio controls="">
+                    <source src="wav/1006_135212_000003_000002_prosodyBERT.wav">
                 </audio>
             </td>
         </tr>
     </tbody></table>
-    <i>His name was John Palmer.</i>
     <table><tbody><tr>
+        <i>Sample 2</i>
         <td>Recording:</td>
         <td>
             <audio controls="">
-                <source src="wav/1006_135212_000002_000004.ori-gl.wav">
+                <source src="wav/LJSpeech_0000000003.ori-gl.wav">
             </audio>
         </td>
         <td></td>
         <td>Padded input:</td>
         <td>
             <audio controls="">
-                <source src="wav/1006_135212_000002_000004.padded-gl.wav">
+                <source src="wav/LJSpeech_0000000003.padded-gl.wav">
             </audio>
         </td>
         <td></td>
-        <td>Reconstructed output:</td>
+        <td>Reconstructed output without prosody pre-training:</td>
         <td>
             <audio controls="">
-                <source src="wav/1006_135212_000002_000004-gl.wav">
+                <source src="wav/LJSpeech_0000000003-speechBERT.wav">
+            </audio>
+        </td>
+        <td>Reconstructed output with prosody pre-training:</td>
+        <td>
+            <audio controls="">
+                <source src="wav/LJSpeech_0000000003-prosodyBERT.wav">
             </audio>
         </td>
     </tr>
@@ -260,7 +272,7 @@ Firstly, we will present the reconstructed speech using the BERT model with pros
 <b>The synthesized speech on our internal speaker for subjective evaluation:</b>
 
 
-<table style="margin-left:auto;margin-right:auto;"><tbody><tr>
+<table style="margin-left:auto;margin-right:auto;width:100%"><tbody><tr>
     <td colspan="3"><b><i>In-domain synthesized speech synthesis with WaveNet vocoder<i></i></b></td>
 </tr>
 <tr><td></td>
