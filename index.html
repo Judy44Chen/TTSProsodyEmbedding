@@ -36,12 +36,12 @@
 <br/>
 
 
-Firstly, we will present the reconstructed speech using the BERT model with and without prosody pre-training (audio unseen in the speech BERT model training).
+Firstly, we will present the reconstructed speech using the BERT model with and without pitch prediction training (audio unseen in the speech BERT model training).
 
 <div>
     <h3>Masked segment reconstructed by speech BERT with Griffin-Lim vocoder</h3>
     
-    <i>There was not a worse vagabond in Shrewsbury than old Barney the piper.</i>
+    Sentence 1: <i>There was not a worse vagabond in Shrewsbury than old Barney the piper.</i>
         <table><tbody><tr>
             <td>Recording:</td>
             <td>
@@ -57,14 +57,14 @@ Firstly, we will present the reconstructed speech using the BERT model with and 
                 </audio>
             </td>
             <td></td>
-			<td>Reconstructed output (w/o prosody pre-training):</td>
+			<td>Reconstructed output (w/o pitch prediction training):</td>
             <td>
                 <audio controls="">
                     <source src="wav/100_121669_000004_000000-gl-speechBERT.wav">
                 </audio>
             </td>
             <td></td>			
-            <td>Reconstructed output (w/ prosody pre-training):</td>
+            <td>Reconstructed output (w/ pitch prediction training):</td>
             <td>
                 <audio controls="">
                     <source src="wav/100_121669_000004_000000-gl-prosodyBERT.wav">
@@ -72,7 +72,7 @@ Firstly, we will present the reconstructed speech using the BERT model with and 
             </td>
         </tr>
     </tbody></table>
-    <i>His name was John Palmer.</i>
+    Sentence 2: <i>His name was John Palmer.</i>
     <table><tbody><tr>
         <td>Recording:</td>
         <td>
@@ -88,14 +88,14 @@ Firstly, we will present the reconstructed speech using the BERT model with and 
             </audio>
         </td>
 		<td></td>
-			<td>Reconstructed output (w/o prosody pre-training):</td>
+			<td>Reconstructed output (w/o pitch prediction training):</td>
             <td>
                 <audio controls="">
                     <source src="wav/1006_135212_000002_000004-gl-speechBERT.wav">
                 </audio>
             </td>
         <td></td>
-        <td>Reconstructed output (w/ prosody pre-training):</td>
+        <td>Reconstructed output (w/ pitch prediction training):</td>
         <td>
             <audio controls="">
                 <source src="wav/1006_135212_000002_000004-gl-prosodyBERT.wav">
@@ -103,6 +103,14 @@ Firstly, we will present the reconstructed speech using the BERT model with and 
         </td>
     </tr>
 </tbody></table>
+
+<br/>
+
+The spectrograms of the wav files in Sentence 2 are listed as follows:
+<br/>
+<embed src="spectrogram_html.pdf" width="500" height="650" type="application/pdf">
+<br/>
+The padded segments are marked by yellow rectangular boxes. From the comparison, we can see that the with the proposed pitch prediction training as proposed in this paper, harmonic curves in the spectrograms are clearer and closer to the recordings.
 
 <br/>
 <br/>
@@ -121,8 +129,13 @@ Firstly, we will present the reconstructed speech using the BERT model with and 
 
 <br/>
 <br/>
-<b>The synthesized speech on LJSpeech for subjective evaluation:</b>
-
+<b>The synthesized speech on LJSpeech for subjective evaluation.</b><br/><br/>
+Three systems are compared:<br/>
+1. Transformer TTS <br/>
+2. Transformer TTS with speech BERT embedding <br/>
+3. Transformer TTS with prosody embedding <br/>
+<br/>
+<br/>
 <table style="margin-left:auto;margin-right:auto;"><tbody><tr>
     <td colspan="3"><b><i>In-domain synthesized speech synthesis with MelGAN vocoder<i></i></b></td>
 </tr>
